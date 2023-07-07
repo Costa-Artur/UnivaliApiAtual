@@ -1,0 +1,21 @@
+using FluentValidation.Results;
+
+namespace Univali.Api.Features.Common;
+
+public abstract class BaseResponse
+{
+    public bool IsSuccess {get
+    {
+        return Errors.Count == 0;
+    }}
+
+    public Dictionary<string, string[]> Errors {get; set;} = new();
+
+    public void FillErrors(ValidationResult validationResult)
+    {
+        foreach (var error in validationResult.ToDictionary())
+        {
+            Errors.Add(error.Key, error.Value);
+        }
+    }
+}

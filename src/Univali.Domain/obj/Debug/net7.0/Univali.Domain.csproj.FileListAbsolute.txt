@@ -1,0 +1,12 @@
+c:\Users\7828497\Desktop\Univali\src\Univali.Domain\bin\Debug\net7.0\Univali.Domain.deps.json
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\bin\Debug\net7.0\Univali.Domain.dll
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\bin\Debug\net7.0\Univali.Domain.pdb
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\Univali.Domain.csproj.AssemblyReference.cache
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\Univali.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\Univali.Domain.AssemblyInfoInputs.cache
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\Univali.Domain.AssemblyInfo.cs
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\Univali.Domain.csproj.CoreCompileInputs.cache
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\Univali.Domain.dll
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\refint\Univali.Domain.dll
+C:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\Univali.Domain.pdb
+c:\Users\7828497\Desktop\Univali\src\Univali.Domain\obj\Debug\net7.0\ref\Univali.Domain.dll
