@@ -7,6 +7,7 @@ using Univali.Api.Features.Answers.Commands.DeleteAnswer;
 using Univali.Api.Features.Answers.Commands.UpdateAnswer;
 using Univali.Api.Features.Answers.Queries.GetAnswerDetail;
 using Univali.Api.Features.Answers.Queries.GetAnswersDetail;
+using Univali.Api.Features.Common;
 
 namespace Univali.Api.Controllers;
 
@@ -48,15 +49,21 @@ public class AnswersController : MainController
     [HttpPost]
     public async Task<ActionResult<CreateAnswerDto>> CreateAnswer(int questionId, CreateAnswerCommand createAnswerCommand)
     {
+        if(createAnswerCommand.QuestionId != questionId) return BadRequest();
+
         var createAnswerCommandResponse = await _mediator.Send(createAnswerCommand);
 
         if (!createAnswerCommandResponse.IsSuccess)
         {
             ConfigureModelState(createAnswerCommandResponse.Errors);
-            return UnprocessableEntity(ModelState);
-        }
 
-        if (createAnswerCommandResponse.Answer == null) return NotFound(ModelState);
+            switch(createAnswerCommandResponse.ErrorType){
+                case Error.ValidationProblem:
+                    return UnprocessableEntity(ModelState);
+                case Error.NotFoundProblem:
+                    return NotFound(ModelState);
+            }
+        }
 
         return CreatedAtRoute
         (

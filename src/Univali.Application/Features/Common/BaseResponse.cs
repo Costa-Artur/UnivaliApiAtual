@@ -2,8 +2,11 @@ using FluentValidation.Results;
 
 namespace Univali.Api.Features.Common;
 
+public enum Error {ValidationProblem , NotFoundProblem}
+
 public abstract class BaseResponse
 {
+    
     public bool IsSuccess {get
     {
         return Errors.Count == 0;
@@ -18,4 +21,6 @@ public abstract class BaseResponse
             Errors.Add(error.Key, error.Value);
         }
     }
+    
+    public Error ErrorType {get;set;}
 }

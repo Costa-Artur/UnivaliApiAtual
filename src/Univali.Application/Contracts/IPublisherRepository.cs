@@ -28,6 +28,8 @@ public interface IPublisherRepository
     public void AddAuthor(Author author);
     public void UpdateAuthor(Author author);
     public void DeleteAuthor(Author author);
+    Task<bool> AuthorExistsAsync(int authorId);
+
 
     Task<IEnumerable<Question>> GetQuestionsByStudentIdAsync(int studentId);
     Task<IEnumerable<Question>> GetQuestionsByLessonIdAsync(int lessonId);

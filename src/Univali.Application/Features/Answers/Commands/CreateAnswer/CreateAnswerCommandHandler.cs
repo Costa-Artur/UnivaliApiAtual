@@ -4,6 +4,7 @@ using FluentValidation.Results;
 using MediatR;
 using Univali.Api.Entities;
 using Univali.Api.Repositories;
+using Univali.Api.Features.Common;
 
 namespace Univali.Api.Features.Answers.Commands.CreateAnswer;
 
@@ -29,11 +30,21 @@ public class CreateAnswerCommandHandler : IRequestHandler<CreateAnswerCommand, C
         if (!validationResult.IsValid)
         {
             createAnswerCommandResponse.FillErrors(validationResult);
+            createAnswerCommandResponse.ErrorType = Error.ValidationProblem;
             return createAnswerCommandResponse;
         }
 
         if (!await _repository.QuestionExistsAsync(request.QuestionId))
         {
+            createAnswerCommandResponse.ErrorType = Error.NotFoundProblem;
+            createAnswerCommandResponse.Errors.Add("Question",new string[] {"Question Not Found"});
+            return createAnswerCommandResponse;
+        }
+
+        if (!await _repository.AuthorExistsAsync(request.AuthorId))
+        {
+            createAnswerCommandResponse.ErrorType = Error.NotFoundProblem;
+            createAnswerCommandResponse.Errors.Add("Author",new string[] {"Author Not Found"});
             return createAnswerCommandResponse;
         }
 
