@@ -22,5 +22,7 @@ public abstract class BaseResponse
         }
     }
     
-    public Error ErrorType {get;set;}
+    public Error? ErrorType {get;set;} = null!;
 }
+
+

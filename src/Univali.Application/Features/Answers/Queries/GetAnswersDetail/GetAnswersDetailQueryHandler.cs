@@ -1,10 +1,11 @@
 using AutoMapper;
 using MediatR;
+using Univali.Api.Features.Common;
 using Univali.Api.Repositories;
 
 namespace Univali.Api.Features.Answers.Queries.GetAnswersDetail;
 
-public class GetAnswersDetailQueryHandler : IRequestHandler<GetAnswersDetailQuery, IEnumerable<GetAnswersDetailDto>>
+public class GetAnswersDetailQueryHandler : IRequestHandler<GetAnswersDetailQuery, GetAnswersDetailResponse>
 {
     private readonly IPublisherRepository _publisherRepository;
     private readonly IMapper _mapper;
@@ -15,14 +16,22 @@ public class GetAnswersDetailQueryHandler : IRequestHandler<GetAnswersDetailQuer
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<GetAnswersDetailDto>> Handle(GetAnswersDetailQuery request, CancellationToken cancellationToken)
+    public async Task<GetAnswersDetailResponse> Handle(GetAnswersDetailQuery request, CancellationToken cancellationToken)
     {
-        if(! await _publisherRepository.QuestionExistsAsync(request.QuestionId))
+        GetAnswersDetailResponse getAnswersDetailResponse = new();
+
+        var questionFromDatabase = await _publisherRepository.GetQuestionWithAnswersByIdAsync(request.QuestionId);
+
+        if(questionFromDatabase == null)
         {
-            return null!;
+            getAnswersDetailResponse.Errors.Add("Question", new string[] {"Question Not Found"});
+            getAnswersDetailResponse.ErrorType = Error.NotFoundProblem;
+            return getAnswersDetailResponse;
         }
 
-        var answersFromDatabase = await _publisherRepository.GetAnswersAsync(request.QuestionId);
-        return _mapper.Map<IEnumerable<GetAnswersDetailDto>>(answersFromDatabase);
+        var answersFromDatabase = questionFromDatabase.Answers;
+        getAnswersDetailResponse.AnswersDetailDtos =  _mapper.Map<IEnumerable<GetAnswersDetailDto>>(answersFromDatabase);
+
+        return getAnswersDetailResponse;
     }
 }

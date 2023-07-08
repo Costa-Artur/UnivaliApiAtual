@@ -364,4 +364,10 @@ public class PublisherRepository : IPublisherRepository
         return await _context.Authors
             .AnyAsync(a => a.AuthorId == authorId);
     }
+
+    public async Task<bool> AnswerExistsAsync(int answerId)
+    {
+        return await _context.Answers
+            .AnyAsync(a => a.AnswerId == answerId);
+    }
 }

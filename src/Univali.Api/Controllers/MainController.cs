@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
+using Univali.Api.Features.Common;
 
 namespace Univali.Api.Controllers;
 
@@ -105,6 +106,20 @@ public abstract class MainController : ControllerBase
             {
                 ModelState.AddModelError(key, value);
             }
+        }
+    }
+
+    public ActionResult CheckStatusCode (BaseResponse response)
+    {
+        ConfigureModelState(response.Errors);
+
+        switch(response.ErrorType){
+            case Error.ValidationProblem:
+                return UnprocessableEntity(ModelState);
+            case Error.NotFoundProblem:
+                return NotFound(ModelState);
+            default:
+                return StatusCode(StatusCodes.Status418ImATeapot);
         }
     }
 }

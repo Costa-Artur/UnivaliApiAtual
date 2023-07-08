@@ -62,4 +62,6 @@ public interface IPublisherRepository
     Task<Answer?> GetAnswerByIdAsync(int answerId);
     Task<IEnumerable<Answer>> GetAnswersAsync(int questionId);
     Task<bool> QuestionExistsAsync(int questionId);
+
+    Task<bool> AnswerExistsAsync(int answerId);
 }

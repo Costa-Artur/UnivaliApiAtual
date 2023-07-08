@@ -27,11 +27,14 @@ public class AnswersController : MainController
     {
         var getAnswersDetailQuery = new GetAnswersDetailQuery {QuestionId = questionId};
 
-        var answersToReturn = await _mediator.Send(getAnswersDetailQuery);
+        var answersResponse = await _mediator.Send(getAnswersDetailQuery);
 
-        if (answersToReturn == null) return NotFound(ModelState);
+        if(!answersResponse.IsSuccess)
+        {
+            return CheckStatusCode(answersResponse);
+        }
 
-        return Ok(answersToReturn);
+        return Ok(answersResponse.AnswersDetailDtos);
     }
 
     [HttpGet("{answerId}", Name = "GetAnswerById")]
@@ -39,30 +42,26 @@ public class AnswersController : MainController
     {
         var getAnswerDetailQuery = new GetAnswerDetailQuery {QuestionId = questionId, AnswerId = answerId};
 
-        var answerToReturn = await _mediator.Send(getAnswerDetailQuery);
+        var answerResponse = await _mediator.Send(getAnswerDetailQuery);
 
-        if (answerToReturn == null) return NotFound(ModelState);
+        if(!answerResponse.IsSuccess)
+        {
+            return CheckStatusCode(answerResponse);
+        }
 
-        return Ok(answerToReturn);
+        return Ok(answerResponse.Answer);
     }
 
     [HttpPost]
     public async Task<ActionResult<CreateAnswerDto>> CreateAnswer(int questionId, CreateAnswerCommand createAnswerCommand)
     {
-        if(createAnswerCommand.QuestionId != questionId) return BadRequest();
+        createAnswerCommand.QuestionId = questionId;
 
         var createAnswerCommandResponse = await _mediator.Send(createAnswerCommand);
 
         if (!createAnswerCommandResponse.IsSuccess)
         {
-            ConfigureModelState(createAnswerCommandResponse.Errors);
-
-            switch(createAnswerCommandResponse.ErrorType){
-                case Error.ValidationProblem:
-                    return UnprocessableEntity(ModelState);
-                case Error.NotFoundProblem:
-                    return NotFound(ModelState);
-            }
+            return CheckStatusCode(createAnswerCommandResponse);
         }
 
         return CreatedAtRoute
@@ -84,11 +83,8 @@ public class AnswersController : MainController
 
         if (!updateAnswerCommandResponse.IsSuccess)
         {
-            ConfigureModelState(updateAnswerCommandResponse.Errors);
-            return UnprocessableEntity(ModelState);
+            return CheckStatusCode(updateAnswerCommandResponse);
         }
-
-        if (!updateAnswerCommandResponse.Exists) return NotFound(ModelState);
 
         return NoContent();
     }
@@ -98,9 +94,12 @@ public class AnswersController : MainController
     {
         var deleteAnswerCommand = new DeleteAnswerCommand {AnswerId = answerId, QuestionId = questionId};
 
-        var result = await _mediator.Send(deleteAnswerCommand);
+        var answerResponse = await _mediator.Send(deleteAnswerCommand);
 
-        if (!result) return NotFound(ModelState);
+        if (!answerResponse.IsSuccess)
+        {
+            return  CheckStatusCode(answerResponse);
+        }
 
         return NoContent();
     }
