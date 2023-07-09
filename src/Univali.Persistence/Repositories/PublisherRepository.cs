@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Univali.Api.DbContexts;
 using Univali.Api.Entities;
+using Univali.Api.Features.Common;
 using Univali.Api.Models;
 
 
@@ -348,9 +349,47 @@ public class PublisherRepository : IPublisherRepository
         return await _context.Answers.FirstOrDefaultAsync(a => a.AnswerId == answerId);
     }
 
-    public async Task<IEnumerable<Answer>> GetAnswersAsync(int questionId)
+    public async Task<(IEnumerable<Answer>, PaginationMetadata)> GetAnswersAsync(int questionId, int pageNumber, int pageSize)
     {
-        return await _context.Answers.Where(a => a.QuestionId == questionId).OrderBy(a => a.AnswerId).ToListAsync();
+        var collection = _context.Answers.Where(a => a.QuestionId == questionId).OrderBy(a => a.AnswerId);
+
+        var totalItemCount = await collection.CountAsync();
+
+        var paginationMetadata = new PaginationMetadata (totalItemCount, pageSize, pageNumber);
+
+        var answersToReturn = await collection
+            .OrderBy(c => c.AnswerId)
+            .Skip(pageSize * (pageNumber - 1))
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (answersToReturn, paginationMetadata); 
+    }
+
+    public async Task<(IEnumerable<Answer>,PaginationMetadata)> GetAnswersAsync(int authorId, string? searchQuery, int pageNumber, int pageSize)
+    {
+        var collection = _context.Answers
+         as IQueryable<Answer>;
+
+        if(string.IsNullOrWhiteSpace(searchQuery)) collection = collection.Where(a => a.AuthorId == authorId);
+
+        if(!string.IsNullOrWhiteSpace(searchQuery))
+        {
+            searchQuery = searchQuery.Trim();
+            collection = collection.Where(c => c.Body.Contains(searchQuery));
+        }
+
+        var totalItemCount = await collection.CountAsync();
+
+        var paginationMetadata = new PaginationMetadata (totalItemCount, pageSize, pageNumber);
+
+        var answersToReturn = await collection
+            .OrderBy(c => c.AnswerId)
+            .Skip(pageSize * (pageNumber - 1))
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (answersToReturn, paginationMetadata);  
     }
 
     public async Task<bool> QuestionExistsAsync(int questionId)

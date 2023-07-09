@@ -982,11 +982,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Persistence\\Univali.Persistence.csproj",
+      "projectUniqueName": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Persistence\\Univali.Persistence.csproj",
       "projectName": "Univali.Persistence",
-      "projectPath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Persistence\\Univali.Persistence.csproj",
+      "projectPath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Persistence\\Univali.Persistence.csproj",
       "packagesPath": "C:\\Users\\artur\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Persistence\\obj\\",
+      "outputPath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\artur\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1003,11 +1003,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Application\\Univali.Application.csproj": {
-              "projectPath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Application\\Univali.Application.csproj"
+            "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Application\\Univali.Application.csproj": {
+              "projectPath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Application\\Univali.Application.csproj"
             },
-            "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Domain\\Univali.Domain.csproj": {
-              "projectPath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Domain\\Univali.Domain.csproj"
+            "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Domain\\Univali.Domain.csproj": {
+              "projectPath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Domain\\Univali.Domain.csproj"
             }
           }
         }

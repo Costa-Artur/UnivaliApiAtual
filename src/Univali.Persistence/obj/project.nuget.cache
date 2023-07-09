@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "whDJZtC0HiSAcVGwVonK2NTpCuEZiRPmdiU2AsvvBOQsfiJmiNtaMTuQ/nu6Ooaxs9YuBon9oRzRrGnHy1N4BQ==",
+  "dgSpecHash": "/wEa/zqeicPEzq4lytTYSZXZXt02CjSrJ0kUECQdCvYZ9mWrPTrZY2gJOqP6mXhrgb2o2gHjFAvx9J2kBv3r3A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Persistence\\Univali.Persistence.csproj",
+  "projectFilePath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Persistence\\Univali.Persistence.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\artur\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\artur\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

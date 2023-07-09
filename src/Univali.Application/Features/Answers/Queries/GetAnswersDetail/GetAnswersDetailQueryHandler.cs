@@ -29,8 +29,15 @@ public class GetAnswersDetailQueryHandler : IRequestHandler<GetAnswersDetailQuer
             return getAnswersDetailResponse;
         }
 
-        var answersFromDatabase = questionFromDatabase.Answers;
+        var totalItemCount = questionFromDatabase.Answers.Count;
+
+        var answersFromDatabase = questionFromDatabase.Answers
+            .Skip(request.PageSize * (request.PageNumber - 1))
+            .Take(request.PageSize);
+
         getAnswersDetailResponse.AnswersDetailDtos =  _mapper.Map<IEnumerable<GetAnswersDetailDto>>(answersFromDatabase);
+
+        getAnswersDetailResponse.paginationMetadata = new PaginationMetadata (totalItemCount, request.PageSize, request.PageNumber);
 
         return getAnswersDetailResponse;
     }

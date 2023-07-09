@@ -1,4 +1,4 @@
-namespace Univali.Api.Repositories;
+namespace Univali.Api.Features.Common;
 
 public class PaginationMetadata
 {

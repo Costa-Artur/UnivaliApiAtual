@@ -1,4 +1,5 @@
 using Univali.Api.Entities;
+using Univali.Api.Features.Common;
 
 namespace Univali.Api.Repositories;
 
@@ -60,7 +61,8 @@ public interface IPublisherRepository
     void AddAnswer(Answer answer);
     void DeleteAnswer(Answer answer);
     Task<Answer?> GetAnswerByIdAsync(int answerId);
-    Task<IEnumerable<Answer>> GetAnswersAsync(int questionId);
+    Task<(IEnumerable<Answer>, PaginationMetadata)> GetAnswersAsync(int questionId, int pageNumber, int pageSize);
+    Task<(IEnumerable<Answer>, PaginationMetadata)> GetAnswersAsync(int authorId, string? searchQuery, int pageNumber, int pageSize);
     Task<bool> QuestionExistsAsync(int questionId);
 
     Task<bool> AnswerExistsAsync(int answerId);

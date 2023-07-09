@@ -1,3 +1,4 @@
+using System.Text.Json;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +24,11 @@ public class AnswersController : MainController
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<GetAnswersDetailDto>>> GetAnswers(int questionId)
+    public async Task<ActionResult<IEnumerable<GetAnswersDetailDto>>> GetAnswers(int questionId, int pageNumber = 1, int pageSize = 5)
     {
-        var getAnswersDetailQuery = new GetAnswersDetailQuery {QuestionId = questionId};
+        if(pageSize > maxPageSize) pageSize = maxPageSize;
+
+        var getAnswersDetailQuery = new GetAnswersDetailQuery {QuestionId = questionId, PageNumber = pageNumber, PageSize = pageSize};
 
         var answersResponse = await _mediator.Send(getAnswersDetailQuery);
 
@@ -33,6 +36,8 @@ public class AnswersController : MainController
         {
             return CheckStatusCode(answersResponse);
         }
+
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(answersResponse.paginationMetadata));
 
         return Ok(answersResponse.AnswersDetailDtos);
     }

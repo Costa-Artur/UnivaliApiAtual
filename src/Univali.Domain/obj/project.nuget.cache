@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cRkCcgSgEpa0VnntUTLrxQfyitARLSg4Cw5O5aiQUGwbYBy+8lOMGMJAJ+z8IClReiErmix9xwCUrrpn/8eM2Q==",
+  "dgSpecHash": "pVMIAzUFQLAydCsvZe/N2SdS/XdrFmJMuHhsNU8XhnlvzRFVkhY2WB4lIDvXfSzChwQ+0XLBvaLqPeUwOnmsoQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\src\\Univali.Domain\\Univali.Domain.csproj",
+  "projectFilePath": "C:\\Users\\artur\\Documents\\PROGRAMAÇÃO\\C#\\PROJETOFINALAPI\\UnivaliApiAtual\\UnivaliApiAtual\\src\\Univali.Domain\\Univali.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
