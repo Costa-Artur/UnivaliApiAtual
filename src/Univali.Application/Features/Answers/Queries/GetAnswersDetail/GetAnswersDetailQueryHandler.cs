@@ -29,15 +29,11 @@ public class GetAnswersDetailQueryHandler : IRequestHandler<GetAnswersDetailQuer
             return getAnswersDetailResponse;
         }
 
-        var totalItemCount = questionFromDatabase.Answers.Count;
-
-        var answersFromDatabase = questionFromDatabase.Answers
-            .Skip(request.PageSize * (request.PageNumber - 1))
-            .Take(request.PageSize);
+        var (answersFromDatabase, paginationMetadata) = await _publisherRepository.GetAnswersAsync(questionFromDatabase.QuestionId, request.PageNumber, request.PageSize);
 
         getAnswersDetailResponse.AnswersDetailDtos =  _mapper.Map<IEnumerable<GetAnswersDetailDto>>(answersFromDatabase);
 
-        getAnswersDetailResponse.paginationMetadata = new PaginationMetadata (totalItemCount, request.PageSize, request.PageNumber);
+        getAnswersDetailResponse.paginationMetadata = paginationMetadata;
 
         return getAnswersDetailResponse;
     }

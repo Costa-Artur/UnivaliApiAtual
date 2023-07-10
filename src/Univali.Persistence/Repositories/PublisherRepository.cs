@@ -270,9 +270,8 @@ public class PublisherRepository : IPublisherRepository
 
     public async Task<bool> ModuleExistsAsync(int moduleId)
     {
-        return await _context.Modules.FindAsync(moduleId) != null;
+        return await _context.Modules.AnyAsync(m => m.ModuleId == moduleId);
     }
-
 
     public void AddStudent(Student student)
     {
